@@ -80,17 +80,17 @@ class _HomeScreenState extends State<HomeScreen> {
           SizedBox(
             height: 30,
           ),
-          GestureDetector(
+         /*  GestureDetector(
             onTap: () {
               double _h = double.parse(_heightController.text);
               double _w = double.parse(_weightController.text);
               setState(() {
-                _bmiResult = (_w/((_h * _h)/ 10000));
+                _bmiResult = (_w / ((_h * _h) / 10000));
                 if (_bmiResult > 25) {
                   _textResult = "You are over weight";
-                }else if (_bmiResult >= 18.5 && _bmiResult <= 25) {
+                } else if (_bmiResult >= 18.5 && _bmiResult <= 25) {
                   _textResult = "You have normal weight";
-                }else  {
+                } else {
                   _textResult = "You are under weight";
                 }
               });
@@ -103,7 +103,47 @@ class _HomeScreenState extends State<HomeScreen> {
                   color: accentHexColor),
             ),
           ),
-          SizedBox(
+          */ SizedBox(
+            height: 50,
+          ),
+          TextButton(
+            
+              style: ButtonStyle(
+               backgroundColor: MaterialStateProperty.all(accentHexColor),
+                foregroundColor: MaterialStateProperty.all<Color>(mainHexColor),
+                overlayColor: MaterialStateProperty.resolveWith<Color?>(
+                  (Set<MaterialState> states) {
+                    if (states.contains(MaterialState.hovered))
+                      return mainHexColor.withOpacity(0.04);
+                    if (states.contains(MaterialState.focused) ||
+                        states.contains(MaterialState.pressed))
+                      return accentHexColor.withOpacity(0.12);
+                    return null; // Defer to the widget's default.
+                  },
+                ),
+              ),
+              onPressed: () {
+                double _h = double.parse(_heightController.text);
+                double _w = double.parse(_weightController.text);
+                setState(() {
+                  _bmiResult = (_w / ((_h * _h) / 10000));
+                  if (_bmiResult > 25) {
+                    _textResult = "You are over weight";
+                  } else if (_bmiResult >= 18.5 && _bmiResult <= 25) {
+                    _textResult = "You have normal weight";
+                  } else {
+                    _textResult = "You are under weight";
+                  }
+                });
+              },
+              child: Text("Calculate",
+              style: TextStyle(
+                  fontSize: 22,
+                  fontWeight: FontWeight.bold,
+                  color: Color.fromARGB(255, 0, 0, 0),
+                  ),
+                  )),
+           SizedBox(
             height: 50,
           ),
           Container(
